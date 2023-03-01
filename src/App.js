@@ -18,9 +18,18 @@ export const weaponAtomFamily = atomFamily({
     name: `Steven -${id}`,
     damage: 50,
   }),
+  /* Atom effects */
+  effects: [
+    ({onSet}) => {
+      onSet(weapon => {
+        console.log(`The weapon has to upgrade to ${weapon.name}`)
+      })
+    }
+  ]
 });
 
 function App() {
+  // const [weapon, setWeapon] = useRecoilState(weaponState);
   const [weapon, setWeapon] = useRecoilState(weaponAtomFamily(" Nyundo"));
 
   console.log("weapon---", weapon);
