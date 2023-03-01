@@ -1,8 +1,8 @@
 import "./App.css";
 import { atom } from "recoil";
 import { useRecoilState } from "recoil";
+import { atomFamily } from "recoil";
 import WeaponDisplay from "./WeaponDisplay";
-
 
 export const weaponState = atom({
   key: "weaponState",
@@ -12,10 +12,16 @@ export const weaponState = atom({
   },
 });
 
-
+export const weaponAtomFamily = atomFamily({
+  key: "weaponAtomFamily",
+  default: (id) => ({
+    name: `Steven -${id}`,
+    damage: 50,
+  }),
+});
 
 function App() {
-  const [weapon, setWeapon] = useRecoilState(weaponState);
+  const [weapon, setWeapon] = useRecoilState(weaponAtomFamily(" Nyundo"));
 
   console.log("weapon---", weapon);
   return (
