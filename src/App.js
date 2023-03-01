@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { atom } from "recoil";
+import { useRecoilState } from "recoil";
+import WeaponDisplay from "./WeaponDisplay";
+
+
+export const weaponState = atom({
+  key: "weaponState",
+  default: {
+    name: "Steven",
+    damage: 50,
+  },
+});
+
+
 
 function App() {
+  const [weapon, setWeapon] = useRecoilState(weaponState);
+
+  console.log("weapon---", weapon);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{weapon?.name}</h1>
+      <p>Damage: {weapon?.damage}</p>
+      <button onClick={() => setWeapon({ name: "Hurricane", damage: 70 })}>
+        Upgrade Weapon
+      </button>
+      <WeaponDisplay />
     </div>
   );
 }
